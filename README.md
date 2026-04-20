@@ -132,3 +132,5 @@ The main controller you’ll typically use for sending trajectories to a UR5e (v
 ```bash
 ros2 control switch_controllers --activate scaled_joint_trajectory_controller 
 ```
+
+---> repo used: Universal_Robots_ROS2_Description & Universal_Robots_ROS2_Driver
