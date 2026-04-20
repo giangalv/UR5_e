@@ -107,8 +107,7 @@ colcon build --symlink-install
 ## PART 3 - Run Calibration Script
 The ROS 2 driver provides a helper launch file to extract factory calibration.
 ```bash
-ros2 launch ur_calibration calibration_correction.launch.py \
-robot_ip:=192.168.12.21 target_filename:="${HOME}/my_robot_calibration.yaml"
+ros2 launch ur_calibration calibration_correction.launch.py robot_ip:=192.168.12.21 target_filename:="${HOME}/my_robot_calibration.yaml"
 ```
 
 The script connects to the robot and downloads its **factory calibration data**.
@@ -122,5 +121,14 @@ Typical output:
 ```
 
 ```bash
-ros2 launch ur_robot_driver ur5.launch.py robot_ip:=192.168.12.21 calibration_file:="${HOME}/my_robot_calibration.yaml"
+ros2 launch ur_robot_driver ur5e.launch.py robot_ip:=192.168.12.21  #NO WORKING
+
+ros2 launch ur_robot_driver ur_control.launch.py ur_type:=ur5e robot_ip:=192.168.12.21 launch_rviz:=false ## work + the next one
+
+ros2 launch ur_moveit_config ur_moveit.launch.py 
+```
+
+The main controller you’ll typically use for sending trajectories to a UR5e (via ROS 2 or MoveIt 2), to activate it:
+```bash
+ros2 control switch_controllers --activate scaled_joint_trajectory_controller 
 ```
